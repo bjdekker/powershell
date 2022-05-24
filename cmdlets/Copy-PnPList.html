@@ -99,7 +99,7 @@
 <pre><code class="lang-powershell">Copy-PnPList -SourceListUrl &lt;String&gt; -DestinationWebUrl &lt;String&gt; [-Title &lt;String&gt;] [-WhatIf] [-Verbose] [-Connection &lt;PnPConnection&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
-<p>This cmdlet allows an existing list to be copied to either the same site or to another site. It copies the fields, views and settings of the list. It does not copy along the list items in the list.</p>
+<p>This cmdlet allows an existing list to be copied to either the same site or to another site (same tenant). It copies the fields, views and settings of the list. It does not copy along the list items in the list. If you wish to copy a list from one tenant to another, you will have to export the list as a provisioning template, and then apply the template to the target tenant.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <pre><code class="lang-powershell">Copy-PnPList -Identity &quot;My List&quot; -Title &quot;Copy of My List&quot;
@@ -115,7 +115,7 @@
 <p>Copies the list &quot;My List&quot; to the site with the provided URL changing the list name to &quot;My copied list&quot;</p>
 <h3 id="example-4">EXAMPLE 4</h3>
 <pre><code class="lang-powershell">$list = Get-PnPList -Identity &quot;My List&quot;
-Copy-PnPList -Identity $l -Title &quot;My copied list&quot;
+Copy-PnPList -Identity $list -Title &quot;My copied list&quot;
 </code></pre>
 <p>Copies the list &quot;My List&quot; to the site with the provided URL changing the list name to &quot;My copied list&quot;</p>
 <h3 id="example-5">EXAMPLE 5</h3>
@@ -221,5 +221,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

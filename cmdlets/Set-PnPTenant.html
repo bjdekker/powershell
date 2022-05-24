@@ -119,8 +119,9 @@
  [-EmailAttestationRequired &lt;Boolean&gt;] [-EmailAttestationReAuthDays &lt;Int32&gt;] [-HideDefaultThemes &lt;Boolean&gt;]
  [-DisabledWebPartIds &lt;Guid[]&gt;] [-EnableAIPIntegration &lt;Boolean&gt;] [-DisableCustomAppAuthentication &lt;Boolean&gt;] 
  [-EnableAutoNewsDigest &lt;Boolean&gt;] [-CommentsOnListItemsDisabled &lt;Boolean&gt;] [-CommentsOnFilesDisabled &lt;Boolean&gt;]
- [-DisableBackToClassic &lt;Boolean&gt;]
- [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
+ [-DisableBackToClassic &lt;Boolean&gt;] [-InformationBarriersSuspension &lt;Boolean&gt;] 
+ [-AllowFilesWithKeepLabelToBeDeletedODB &lt;Boolean&gt;] [-AllowFilesWithKeepLabelToBeDeletedSPO &lt;Boolean&gt;]
+ [-Force] [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
 <p>Sets organization-level site collection properties such as StorageQuota, StorageQuotaAllocated, ResourceQuota,
@@ -286,7 +287,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-disabledwebpartids">-DisabledWebPartIds</h3>
-<p>Guids of out of the box modern web part id's to hide</p>
+<p>Guids of out of the box modern web part id's to disallow from being added to pages and remove from pages where they already have been used. Currently only the following web parts can be disabled in such a way:</p>
+<p>Amazon Kindle: 46698648-fcd5-41fc-9526-c7f7b2ace919
+YouTube: 544dd15b-cf3c-441b-96da-004d5a8cea1d
+Twitter: f6fdf4f8-4a24-437b-a127-32e66a5dd9b4
+Embed: 490d7c76-1824-45b2-9de3-676421c997fa
+Microsoft Bookings: d24a7165-c455-4d43-8bc8-fedb04d6c1b5
+Stream: 275c0095-a77e-4f6d-a2a0-6a7626911518</p>
+<p>To block one of them, simply pass in the GUID behind the parameter. To disable more than one, separate the GUIDs with a comma. To unblock web parts, just set this property leaving out the one(s) you wish to unblock, leaving the ones that you would like to remain blocked. To unblock all web parts, use <code>-DisabledWebPartIds @()</code>. To see which one(s) are currently blocked, use <code>Get-PnPTenant | Select DisabledWebPartIds</code>.</p>
 <pre><code class="lang-yaml">Type: Guid[]
 Parameter Sets: (All)
 
@@ -773,7 +781,7 @@ Accept wildcard characters: False
 <p>The valid values are:
 ExternalUserAndGuestSharing (default) - External user sharing (share by email) and guest link sharing are both enabled. Disabled - External user sharing (share by email) and guest link sharing are both disabled.
 ExternalUserSharingOnly - External user sharing (share by email) is enabled, but guest link sharing is disabled.</p>
-<p>For more information about sharing, see Manage external sharing for your SharePoint online environment (<a href="https://docs.microsoft.com/en-us/sharepoint/turn-external-sharing-on-or-off">https://docs.microsoft.com/en-us/sharepoint/turn-external-sharing-on-or-off</a>).</p>
+<p>For more information about sharing, see Manage external sharing for your SharePoint online environment (<a href="https://docs.microsoft.com/sharepoint/turn-external-sharing-on-or-off">https://docs.microsoft.com/sharepoint/turn-external-sharing-on-or-off</a>).</p>
 <pre><code class="lang-yaml">Type: SharingCapabilities
 Parameter Sets: (All)
 Accepted values: Disabled, ExternalUserSharingOnly, ExternalUserAndGuestSharing, ExistingExternalUserSharingOnly
@@ -982,6 +990,105 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
+<h3 id="-informationbarrierssuspension">-InformationBarriersSuspension</h3>
+<p>Allows suspension of the information barriers future in a Microsoft 365 tenant. Setting this to $true will disable information barriers, setting this to $falsde will enable information barriers. For more information, see <a href="https://docs.microsoft.com/sharepoint/information-barriers">https://docs.microsoft.com/sharepoint/information-barriers</a>.</p>
+<pre><code class="lang-yaml">Type: Boolean
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-allowfileswithkeeplabeltobedeletedspo">-AllowFilesWithKeepLabelToBeDeletedSPO</h3>
+<p>Allows configuration on if files located on SharePoint Online having retention labels on them blocking them from deletion ($false) or if they can be deleted which will move the file to the preservation hold library ($true)</p>
+<pre><code class="lang-yaml">Type: Boolean
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: $true
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-allowfileswithkeeplabeltobedeletedodb">-AllowFilesWithKeepLabelToBeDeletedODB</h3>
+<p>Allows configuration on if files located on OneDrive for Business having retention labels on them blocking them from deletion ($false) or if they can be deleted which will move the file to the preservation hold library ($true)</p>
+<pre><code class="lang-yaml">Type: Boolean
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: $true
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-disableaddtoonedrive">-DisableAddToOneDrive</h3>
+<p>Allows configuration on <code>Add shortcut to OneDrive</code> feature in SharePoint document libraries. If set to <code>$true</code>, then this feature will be disabled on all sites in the tenant. If set to <code>$false</code>, it will be enabled on all sites in the tenant.</p>
+<pre><code class="lang-yaml">Type: Boolean
+Parameter Sets: (All)
+Aliases: DisableAddShortcutsToOneDrive
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-isfluidenabled">-IsFluidEnabled</h3>
+<p>Allows configuration on whether Fluid components are enabled or disabled in the tenant. If set to <code>$true</code>, then this feature will be enabled on all sites in the tenant. If set to <code>$false</code>, it will be disabled on all sites in the tenant.</p>
+<pre><code class="lang-yaml">Type: Boolean
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-disablepersonallistcreation">-DisablePersonalListCreation</h3>
+<p>Allows configuring whether personal lists created within the OneDrive for Business site of the user is enabled or disabled in the tenant. If set to <code>$true</code>, personal lists will be allowed to be created in the tenant. If set to <code>$false</code>, it will be disabled in the tenant.</p>
+<pre><code class="lang-yaml">Type: Boolean
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-disabledmodernlisttemplateids">-DisabledModernListTemplateIds</h3>
+<p>Guids of out of the box modern list templates to hide when creating a new list</p>
+<pre><code class="lang-yaml">Type: Guid[]
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-enablemodernlisttemplateids">-EnableModernListTemplateIds</h3>
+<p>Guids of out of the box modern liststemplates to show when creating a new list</p>
+<pre><code class="lang-yaml">Type: Guid[]
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-force">-Force</h3>
+<p>If provided, no confirmation will be requested and the action will be performed</p>
+<pre><code class="lang-yaml">Type: SwitchParameter
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
 <h2 id="related-links">RELATED LINKS</h2>
 <p><a href="https://aka.ms/m365pnp">Microsoft 365 Patterns and Practices</a></p>
 </article>
@@ -1010,5 +1117,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

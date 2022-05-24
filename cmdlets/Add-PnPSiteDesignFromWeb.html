@@ -112,18 +112,6 @@
 </code></pre>
 <p>Generates a site script based on the list &quot;Issue list&quot; in the current site and based on the generated script it will create a site script and a site design with the specified title, description and logo for modern team sites.</p>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-confirm">-Confirm</h3>
-<p>Prompts you for confirmation before running the cmdlet.</p>
-<pre><code class="lang-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
 <h3 id="-connection">-Connection</h3>
 <p>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</p>
 <pre><code class="lang-yaml">Type: PnPConnection
@@ -206,7 +194,7 @@ Accept wildcard characters: False
 <p>Specifies the type of site to which this design applies</p>
 <pre><code class="lang-yaml">Type: SiteWebTemplate
 Parameter Sets: (All)
-Accepted values: TeamSite, CommunicationSite, GrouplessTeamSite
+Accepted values: TeamSite, CommunicationSite, GrouplessTeamSite, ChannelSite
 
 Required: True
 Position: Named
@@ -216,9 +204,8 @@ Accept wildcard characters: False
 </code></pre>
 <h3 id="-thumbnailurl">-ThumbnailUrl</h3>
 <p>The full URL of a thumbnail image, i.e. <a href="https://contoso.sharepoint/siteassets/image.png">https://contoso.sharepoint/siteassets/image.png</a>. If none is specified, SharePoint uses a generic image. Recommended size is 400 x 300 pixels. This is the image that will be shown when selecting a template through &quot;Apply a site template&quot; or &quot;Browse templates&quot; shown in &quot;Start designing your site&quot; shown when creating a new site.</p>
-<pre><code class="lang-yaml">Type: SiteWebTemplate
+<pre><code class="lang-yaml">Type: String
 Parameter Sets: (All)
-Accepted values: TeamSite, CommunicationSite
 
 Required: False
 Position: Named
@@ -343,5 +330,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

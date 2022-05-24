@@ -84,40 +84,57 @@
                     <h1 id="add-pnppage">Add-PnPPage</h1>
 
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Allows creation of a new page</p>
+<p>Creates a new page</p>
 <h2 id="syntax">SYNTAX</h2>
 <pre><code class="lang-powershell">Add-PnPPage [-Name] &lt;String&gt; [-LayoutType &lt;PageLayoutType&gt;]
  [-PromoteAs &lt;PagePromoteType&gt;] [-ContentType &lt;ContentTypePipeBind&gt;] [-CommentsEnabled] [-Publish]
- [-HeaderLayoutType &lt;PageHeaderLayoutType&gt;] [-ScheduledPublishDate &lt;DateTime&gt;] [-Connection &lt;PnPConnection&gt;]
- [&lt;CommonParameters&gt;]
+ [-HeaderLayoutType &lt;PageHeaderLayoutType&gt;] [-ScheduledPublishDate &lt;DateTime&gt;] 
+ [-Translate][-TranslationLanguageCodes &lt;Int[][]&gt;]
+ [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
-<p>Allows creation of a new page. The page will be located inside the Site Pages library of the cite currently connected to.</p>
+<p>Creates a new page. The page will be located inside the Site Pages library of the site currently connected to.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <pre><code class="lang-powershell">Add-PnPPage -Name &quot;NewPage&quot;
 </code></pre>
 <p>Creates a new page named 'NewPage'</p>
 <h3 id="example-2">EXAMPLE 2</h3>
+<pre><code class="lang-powershell">Add-PnPPage -Name &quot;NewPage&quot; -Title &quot;Welcome to my page&quot;
+</code></pre>
+<p>Creates a new page NewPage.aspx with the title as provided</p>
+<h3 id="example-3">EXAMPLE 3</h3>
 <pre><code class="lang-powershell">Add-PnPPage -Name &quot;NewPage&quot; -ContentType &quot;MyPageContentType&quot;
 </code></pre>
 <p>Creates a new page named 'NewPage' and sets the content type to the content type specified</p>
-<h3 id="example-3">EXAMPLE 3</h3>
+<h3 id="example-4">EXAMPLE 4</h3>
 <pre><code class="lang-powershell">Add-PnPPage -Name &quot;NewPageTemplate&quot; -PromoteAs Template
 </code></pre>
 <p>Creates a new page named 'NewPage' and saves as a template to the site.</p>
-<h3 id="example-4">EXAMPLE 4</h3>
+<h3 id="example-5">EXAMPLE 5</h3>
 <pre><code class="lang-powershell">Add-PnPPage -Name &quot;Folder/NewPage&quot;
 </code></pre>
 <p>Creates a new page named 'NewPage' under 'Folder' folder and saves as a template to the site.</p>
-<h3 id="example-5">EXAMPLE 5</h3>
+<h3 id="example-6">EXAMPLE 6</h3>
 <pre><code class="lang-powershell">Add-PnPPage -Name &quot;NewPage&quot; -HeaderLayoutType ColorBlock
 </code></pre>
 <p>Creates a new page named 'NewPage' using the ColorBlock header layout</p>
-<h3 id="example-6">EXAMPLE 6</h3>
+<h3 id="example-7">EXAMPLE 7</h3>
 <pre><code class="lang-powershell">Add-PnPPage -Name &quot;NewPage&quot; Article -ScheduledPublishDate (Get-Date).AddHours(1)
 </code></pre>
 <p>Creates a new page named 'NewPage' using the article layout and schedule it to be published in 1 hour from now</p>
+<h3 id="example-8">EXAMPLE 8</h3>
+<pre><code class="lang-powershell">Add-PnPPage -Name &quot;NewPage&quot; -Translate
+</code></pre>
+<p>Creates a new page named 'NewPage' and also creates the necessary translated page for the supported languages in the site collection.</p>
+<h3 id="example-9">EXAMPLE 9</h3>
+<pre><code class="lang-powershell">Add-PnPPage -Name &quot;NewPage&quot; -Translate -TranslationLanguageCodes 1043
+</code></pre>
+<p>Creates a new page named 'NewPage' and also creates the necessary translated page for the specified language in the site collection. In this case, it will create the translated page for Dutch language. If the Dutch language is not enabled, it will enable the language and then create the translated page.</p>
+<h3 id="example-10">EXAMPLE 10</h3>
+<pre><code class="lang-powershell">Add-PnPPage -Name &quot;NewPage&quot; -Translate -TranslationLanguageCodes 1043,1035
+</code></pre>
+<p>Creates a new page named 'NewPage' and also creates the necessary translated page for the specified languages in the site collection. In this case, it will create the translated pages for Dutch and Finnish languages. If these languages are not enabled, it will enable these languages and then create the translated pages for the specified languages.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-connection">-Connection</h3>
 <p>Optional connection to be used by the cmdlet.
@@ -135,17 +152,6 @@ Accept wildcard characters: False
 <h3 id="-commentsenabled">-CommentsEnabled</h3>
 <p>Enables or Disables the comments on the page</p>
 <pre><code class="lang-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-connection-1">-Connection</h3>
-<p>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</p>
-<pre><code class="lang-yaml">Type: PnPConnection
 Parameter Sets: (All)
 
 Required: False
@@ -234,6 +240,28 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
+<h3 id="-translate">-Translate</h3>
+<p>Creates multilingual pages for all the languages specified in the site collection</p>
+<pre><code class="lang-yaml">Type: SwitchParameter
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-translationlanguagecodes">-TranslationLanguageCodes</h3>
+<p>Creates multilingual pages for specified languages.</p>
+<pre><code class="lang-yaml">Type: Integer array
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
 <h2 id="related-links">RELATED LINKS</h2>
 <p><a href="https://aka.ms/m365pnp">Microsoft 365 Patterns and Practices</a></p>
 </article>
@@ -262,5 +290,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

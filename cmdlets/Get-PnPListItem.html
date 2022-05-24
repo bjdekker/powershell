@@ -129,7 +129,7 @@
 <h3 id="example-6">EXAMPLE 6</h3>
 <pre><code class="lang-powershell">Get-PnPListItem -List Tasks -Query &quot;&lt;View&gt;&lt;ViewFields&gt;&lt;FieldRef Name='Title'/&gt;&lt;FieldRef Name='Modified'/&gt;&lt;/ViewFields&gt;&lt;Query&gt;&lt;Where&gt;&lt;Geq&gt;&lt;FieldRef Name='Modified'/&gt;&lt;Value Type='DateTime'&gt;&lt;Today/&gt;&lt;/Value&gt;&lt;/Eq&gt;&lt;/Where&gt;&lt;/Query&gt;&lt;/View&gt;&quot;
 </code></pre>
-<p>Retrieves all list items modified today, retrieving the columns 'Title' and 'Modified'. When you use -Query, you can add a <viewfields> clause to retrieve specific columns (since you cannot use -Fields)<p>
+<p>Retrieves all list items modified today, retrieving the columns 'Title' and 'Modified'. When you use -Query, you can add a <code>&lt;ViewFields&gt;</code> clause to retrieve specific columns (since you cannot use -Fields)</p>
 <h3 id="example-7">EXAMPLE 7</h3>
 <pre><code class="lang-powershell">Get-PnPListItem -List Tasks -PageSize 1000
 </code></pre>
@@ -142,6 +142,15 @@
 <pre><code class="lang-powershell">Get-PnPListItem -List Samples -FolderServerRelativeUrl &quot;/sites/contosomarketing/Lists/Samples/Demo&quot;
 </code></pre>
 <p>Retrieves all list items from the Demo folder in the Samples list located in the contosomarketing site collection</p>
+<h3 id="example-10">EXAMPLE 10</h3>
+<pre><code class="lang-powershell">PS D:\Code&gt; Get-PnPListItem -List &quot;Shared Documents&quot; | Select-Object id,@{label=&quot;Filename&quot;;expression={$_.FieldValues.FileLeafRef}}
+
+Id Filename
+-- --------
+ 1 Contoso-Financial-Calendar-Q1_68340_97779.pptx
+ 5 Does this work.docx
+</code></pre>
+<p>Retrieves all list items from the Shared Documents and shows each item's ID and Filename</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-connection">-Connection</h3>
 <p>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</p>
@@ -244,7 +253,7 @@ Accept wildcard characters: False
 </code></pre>
 <h2 id="related-links">RELATED LINKS</h2>
 <p><a href="https://aka.ms/m365pnp">Microsoft 365 Patterns and Practices</a></p>
-</viewfields></article>
+</article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
@@ -270,5 +279,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

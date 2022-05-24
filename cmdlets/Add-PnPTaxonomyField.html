@@ -93,8 +93,8 @@
  [&lt;CommonParameters&gt;]
 </code></pre>
 <h3 id="id">Id</h3>
-<pre><code class="lang-powershell">Add-PnPTaxonomyField [-List &lt;ListPipeBind&gt;] -DisplayName &lt;String&gt; -InternalName &lt;String&gt;
- [-TaxonomyItemId &lt;Guid&gt;] [-Group &lt;String&gt;] [-Id &lt;Guid&gt;] [-AddToDefaultView] [-MultiValue]
+<pre><code class="lang-powershell">Add-PnPTaxonomyField [-List &lt;ListPipeBind&gt;] -DisplayName &lt;String&gt; -InternalName &lt;String&gt; 
+-TaxonomyItemId &lt;Guid&gt; [-Group &lt;String&gt;] [-Id &lt;Guid&gt;] [-AddToDefaultView] [-MultiValue]
  [-Required] [-FieldOptions &lt;AddFieldOptions&gt;] [-Connection &lt;PnPConnection&gt;]
  [&lt;CommonParameters&gt;]
 </code></pre>
@@ -105,6 +105,10 @@
 <pre><code class="lang-powershell">Add-PnPTaxonomyField -DisplayName &quot;Test&quot; -InternalName &quot;Test&quot; -TermSetPath &quot;TestTermGroup|TestTermSet&quot;
 </code></pre>
 <p>Adds a new taxonomy field called &quot;Test&quot; that points to the TestTermSet which is located in the TestTermGroup</p>
+<h3 id="example-2">EXAMPLE 2</h3>
+<pre><code class="lang-powershell">Add-PnPTaxonomyField -DisplayName &quot;Test&quot; -InternalName &quot;Test&quot; -TaxonomyItemId &quot;0e5fe3c6-3e6a-4d25-9f48-82a655f15992&quot; 
+</code></pre>
+<p>Adds a new taxonomy field called &quot;Test&quot; that points to the Term set with the term set id of 0e5fe3c6-3e6a-4d25-9f48-82a655f15992</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-addtodefaultview">-AddToDefaultView</h3>
 <p>Switch Parameter if this field must be added to the default view</p>
@@ -140,7 +144,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
 <h3 id="-fieldoptions">-FieldOptions</h3>
-<p>Specifies the control settings while adding a field. See <a href="https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.client.addfieldoptions.aspx">https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.client.addfieldoptions.aspx</a> for details</p>
+<p>Specifies the control settings while adding a field. See <a href="https://docs.microsoft.com/previous-versions/office/sharepoint-server/ee542202(v=office.15)">https://docs.microsoft.com/previous-versions/office/sharepoint-server/ee542202(v=office.15)</a> for details</p>
 <pre><code class="lang-yaml">Type: AddFieldOptions
 Parameter Sets: (All)
 Accepted values: DefaultValue, AddToDefaultContentType, AddToNoContentType, AddToAllContentTypes, AddFieldInternalNameHint, AddFieldToDefaultView, AddFieldCheckDisplayName
@@ -278,5 +282,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>

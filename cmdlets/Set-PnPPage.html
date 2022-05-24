@@ -90,6 +90,7 @@
  [-LayoutType &lt;PageLayoutType&gt;] [-PromoteAs &lt;PagePromoteType&gt;] [-CommentsEnabled]
  [-Publish] [-HeaderType &lt;PageHeaderType&gt;] [-HeaderLayoutType &lt;PageHeaderLayoutType&gt;] [-ScheduledPublishDate &lt;DateTime&gt;] 
  [-RemoveScheduledPublish] [-ContentType &lt;ContentTypePipeBind&gt;] [-ThumbnailUrl &lt;String&gt;] 
+ [-Translate][-TranslationLanguageCodes &lt;Int[][]&gt;]
  [-Connection &lt;PnPConnection&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
@@ -123,6 +124,18 @@
 <pre><code class="lang-powershell">Set-PnPPage -Identity &quot;MyPage&quot; -ScheduledPublishDate (Get-Date).AddHours(1)
 </code></pre>
 <p>Schedules the page &quot;MyPage&quot; to be published in one hour from now</p>
+<h3 id="example-8">EXAMPLE 8</h3>
+<pre><code class="lang-powershell">Set-PnPPage -Name &quot;NewPage&quot; -Translate
+</code></pre>
+<p>Creates the necessary translated pages for all the supported languages in the site collection.</p>
+<h3 id="example-9">EXAMPLE 9</h3>
+<pre><code class="lang-powershell">Set-PnPPage -Name &quot;NewPage&quot; -Translate -TranslationLanguageCodes 1043
+</code></pre>
+<p>Creates the necessary translated page for the specified language in the site collection. In this case, it will create the translated page for Dutch language. If the Dutch language is not enabled, it will enable the language and then create the translated page.</p>
+<h3 id="example-10">EXAMPLE 10</h3>
+<pre><code class="lang-powershell">Set-PnPPage -Name &quot;NewPage&quot; -Translate -TranslationLanguageCodes 1043,1035
+</code></pre>
+<p>Creates the necessary translated page for the specified languages in the site collection. In this case, it will create the translated pages for Dutch and Finnish languages. If these languages are not enabled, it will enable these languages and then create the translated pages for the specified languages.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-commentsenabled">-CommentsEnabled</h3>
 <p>Enables or Disables the comments on the page</p>
@@ -282,6 +295,28 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
+<h3 id="-translate">-Translate</h3>
+<p>Creates multilingual pages for all the languages specified in the site collection</p>
+<pre><code class="lang-yaml">Type: SwitchParameter
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-translationlanguagecodes">-TranslationLanguageCodes</h3>
+<p>Creates multilingual pages for specified languages.</p>
+<pre><code class="lang-yaml">Type: Integer array
+Parameter Sets: (All)
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
 <h2 id="related-links">RELATED LINKS</h2>
 <p><a href="https://aka.ms/m365pnp">Microsoft 365 Patterns and Practices</a></p>
 </article>
@@ -310,5 +345,12 @@ Accept wildcard characters: False
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ag6usxufyq");
+    </script>  </body>
 </html>
